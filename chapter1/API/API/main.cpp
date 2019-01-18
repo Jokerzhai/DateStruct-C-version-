@@ -81,4 +81,53 @@ bool make2dArray(T ** &x, int numberOfRows, int numberOfColumns)
 
 
 //program 1-11 创建一个二维数组，没有异常处理
+template<class T>
+void make2dArray(T ** &x,int numberOfRows,int numberOfColumns)
+{//创建一个二维数组
+    //创建行指针
+    x = new T * [numberOfRows];
 
+    //为每一行分配空间
+    for (int i = 0; i < numberOfRows; i++)
+        x[i] = new T [numberOfColumns];
+}
+
+
+//program 1-12 释放在函数make2dArray 中分配的空间
+template<class T>
+void delete2dArray(T ** &x,int numberOfRows)
+{//删除二维数组x
+    //删除行数组空间
+    for (int i = 0; i < numberOfRows; i++)
+        delete [] x[i];
+    //删除行指针
+    delete [] x;
+    x = NULL;
+}
+
+
+//Program 1-13 currency 类声明
+class currency
+{
+    public:
+        //构造函数
+        currency(signType theSign = plus;
+                unsigned long theDollars = 0;
+                unsigned int theCents =0);
+        //析构函数
+        ~currency(){}
+        void setValue(signType,unsigned long,unsigned int);
+        void setValue(double);
+        signType getSign() const {return sign;}
+        unsigned long getDollars() const {return dollars;}
+        unsigned int getCents() const {return cents;}
+        currency add(const currency&) const;
+        currency& increment(const currency&);
+        void output() const;
+    private:
+        signType sign;          //对象的符号
+        unsigned long dollars;  //美元的数量
+        unsigned int cents;     //美分的数量
+};
+
+//Program 1-14
